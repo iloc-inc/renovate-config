@@ -1,20 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base", "./hugo.json"],
+  "extends": ["config:base"],
   "timezone": "Asia/Tokyo",
   "schedule": ["before 8am every weekday"],
   "labels": ["dependencies"],
-  "assignees": ["your-github-username"],
-  "reviewers": ["your-github-username"],
+  "assignees": ["TakujiNakada"],
+  "reviewers": ["TakujiNakada"],
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "🛠 Dependency Dashboard",
   "semanticCommits": true,
   "packageRules": [
-    {
-      "matchManagers": ["gomod"],
-      "groupName": "go modules",
-      "enabled": true
-    },
     {
       "matchPackagePatterns": ["^@?aws-sdk"],
       "groupName": "aws-sdk packages"
