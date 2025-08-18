@@ -1,0 +1,49 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "description": "Terraform providers: 基本は手動。PRはまとめる",
+      "matchManagers": ["terraform"],
+      "matchDatasources": ["terraform-provider"],
+      "groupName": "terraform providers",
+      "labels": ["terraform", "provider"],
+      "stabilityDays": 3,
+      "automerge": false
+    },
+    {
+      "description": "hashicorp/aws の patch は自動マージ可（安全寄り）",
+      "matchManagers": ["terraform"],
+      "matchDatasources": ["terraform-provider"],
+      "matchPackageNames": ["hashicorp/aws"],
+      "matchUpdateTypes": ["patch"],
+      "groupName": "aws provider (patch)",
+      "labels": ["terraform", "provider", "aws"],
+      "automerge": true
+    },
+    {
+      "description": "Terraform modules は手動（挙動変化リスク大のため）",
+      "matchManagers": ["terraform"],
+      "matchDatasources": ["terraform-module"],
+      "groupName": "terraform modules",
+      "labels": ["terraform", "module"],
+      "automerge": false
+    },
+    {
+      "description": "required_version（core本体）は常に手動にする",
+      "matchManagers": ["terraform"],
+      "matchDepTypes": ["required_version"],
+      "groupName": "terraform core version",
+      "labels": ["terraform", "core"],
+      "automerge": false
+    },
+    {
+      "description": ".terraform-version（tfenv等）: patchは自動",
+      "matchManagers": ["terraform-version"],
+      "groupName": "terraform toolchain",
+      "labels": ["terraform", "toolchain"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
+    }
+  ],
+  "schedule": ["before 8am every weekday"]
+}

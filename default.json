@@ -14,6 +14,7 @@
     },
     {
       "matchUpdateTypes": ["minor", "patch"],
+      "excludeManagers": ["terraform", "terraform-version", "terragrunt"],
       "automerge": true
     }
   ]
