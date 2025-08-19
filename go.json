@@ -2,9 +2,46 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "packageRules": [
     {
-      "matchManagers": ["gomod"],
-      "groupName": "go modules",
-      "enabled": true
+      "matchManagers": ["gomod", "regex"],
+      "matchPackagePatterns": ["^go$"],
+      "groupName": "Go dependencies"
+    },
+    {
+      "fileMatch": ["^\\.go-version$"],
+      "matchStrings": ["^(?<currentValue>\\d+\\.\\d+(\\.\\d+)?)$"],
+      "depNameTemplate": "go",
+      "versioningTemplate": "semver"
+    },
+    {
+      "fileMatch": ["^go\\.mod$"],
+      "matchStrings": [
+        "(?m)^go (?<currentValue>\\d+\\.\\d+(\\.\\d+)?)$",
+        "(?m)^toolchain go(?<currentValue>\\d+\\.\\d+(\\.\\d+)?)$"
+      ],
+      "depNameTemplate": "go",
+      "versioningTemplate": "golang"
+    },
+    {
+      "fileMatch": ["^go\\.work$"],
+      "matchStrings": ["(?m)^toolchain go(?<currentValue>\\d+\\.\\d+(\\.\\d+)?)$"],
+      "depNameTemplate": "go",
+      "versioningTemplate": "semver"
+    },
+    {
+      "fileMatch": ["^docker-compose\\.ya?ml$"],
+      "matchStrings": ["golangci/golangci-lint:v(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
+      "depNameTemplate": "golangci/golangci-lint",
+      "versioningTemplate": "semver"
+    },
+    {
+      "fileMatch": [".github/workflows/.*\\.ya?ml$"],
+      "matchStrings": ["version:\\s*v?(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
+      "depNameTemplate": "golangci/golangci-lint",
+      "versioningTemplate": "semver"
+    },
+    {
+      "matchPackageNames": ["golangci/golangci-lint"],
+      "groupName": "golangci-lint dependencies"
     }
   ]
 }
