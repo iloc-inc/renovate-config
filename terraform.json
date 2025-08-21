@@ -2,34 +2,41 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "packageRules": [
     {
-      "description": "Terraform providers: 基本は手動。PRはまとめる",
+      "description": "Terraform providers: 手動。PRはまとめる。新着直後はPR作成を遅らせる＋lockfile更新",
       "matchManagers": ["terraform"],
       "matchDatasources": ["terraform-provider"],
       "groupName": "terraform providers",
       "labels": ["terraform", "provider"],
-      "stabilityDays": 3,
+      "minimumReleaseAge": "3 days",
+      "postUpdateOptions": ["terraformLockFile"],
+      "rangeStrategy": "bump",
       "automerge": false
     },
     {
-      "description": "hashicorp/aws の patch は自動マージ可（安全寄り）",
+      "description": "hashicorp/aws の patch は自動マージ（PR経由）＋lockfile更新",
       "matchManagers": ["terraform"],
       "matchDatasources": ["terraform-provider"],
       "matchPackageNames": ["hashicorp/aws"],
       "matchUpdateTypes": ["patch"],
       "groupName": "aws provider (patch)",
       "labels": ["terraform", "provider", "aws"],
-      "automerge": true
+      "postUpdateOptions": ["terraformLockFile"],
+      "rangeStrategy": "bump",
+      "automerge": true,
+      "automergeType": "pr"
     },
     {
-      "description": "Terraform modules は手動（挙動変化リスク大のため）",
+      "description": "Terraform modules は手動（挙動差リスク大）",
       "matchManagers": ["terraform"],
       "matchDatasources": ["terraform-module"],
       "groupName": "terraform modules",
       "labels": ["terraform", "module"],
+      "rangeStrategy": "bump",
+      "separateMinorPatch": true,
       "automerge": false
     },
     {
-      "description": "required_version（core本体）は常に手動にする",
+      "description": "required_version（core本体）は常に手動",
       "matchManagers": ["terraform"],
       "matchDepTypes": ["required_version"],
       "groupName": "terraform core version",
@@ -37,13 +44,13 @@
       "automerge": false
     },
     {
-      "description": ".terraform-version（tfenv等）: patchは自動",
+      "description": ".terraform-version（tfenv）: patchは自動（PR経由）",
       "matchManagers": ["terraform-version"],
       "groupName": "terraform toolchain",
       "labels": ["terraform", "toolchain"],
       "matchUpdateTypes": ["patch"],
-      "automerge": true
+      "automerge": true,
+      "automergeType": "pr"
     }
-  ],
-  "schedule": ["before 8am every weekday"]
+  ]
 }

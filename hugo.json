@@ -1,16 +1,54 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "packageRules": [
+
+  "regexManagers": [
     {
-      "matchPackageNames": ["github.com/gohugoio/hugo"],
-      "groupName": "Hugo CLI",
-      "enabled": true
+      "description": "Netlify の HUGO_VERSION",
+      "fileMatch": ["^netlify\\.toml$"],
+      "matchStrings": [
+        "HUGO_VERSION\\s*=\\s*\"?(?<currentValue>\\d+\\.\\d+\\.\\d+)\"?"
+      ],
+      "depNameTemplate": "gohugoio/hugo",
+      "datasourceTemplate": "github-releases"
     },
     {
+      "description": "GitHub Actions: actions-hugo の hugo-version 入力",
+      "fileMatch": ["^\\.github/workflows/.*\\.ya?ml$"],
+      "matchStrings": [
+        "hugo-version:\\s*\"?v?(?<currentValue>\\d+\\.\\d+\\.\\d+)\"?"
+      ],
+      "depNameTemplate": "gohugoio/hugo",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "description": "Docker/Compose: klakegg/gohugoio のタグから数値部だけ更新",
+      "fileMatch": ["(^|/)Dockerfile$", "^docker-compose\\.ya?ml$"],
+      "matchStrings": [
+        "(?:klakegg|gohugoio)/hugo:(?<currentValue>\\d+(?:\\.\\d+){1,2})(?:[\\w\\-]*)"
+      ],
+      "depNameTemplate": "gohugoio/hugo",
+      "datasourceTemplate": "github-releases"
+    }
+  ],
+
+  "packageRules": [
+    {
+      "description": "Hugo CLI の更新（RC/βは除外、手動レビュー）",
+      "matchPackageNames": ["gohugoio/hugo"],
+      "labels": ["hugo", "cli"],
+      "ignoreUnstable": true,
+      "separateMinorPatch": true,
+      "automerge": false,
+      "minimumReleaseAge": "3 days"
+    },
+    {
+      "description": "Hugo themes（git submodules）はまとめてPR。手動レビュー、少し寝かす",
       "matchManagers": ["git-submodules"],
-      "groupName": "Hugo themes",
       "matchPaths": ["themes/**"],
-      "enabled": true
+      "groupName": "Hugo themes",
+      "labels": ["hugo", "theme"],
+      "minimumReleaseAge": "3 days",
+      "automerge": false
     }
   ]
 }
