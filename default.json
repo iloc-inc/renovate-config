@@ -5,17 +5,11 @@
   "schedule": ["before 8am every weekday"],
   "labels": ["dependencies"],
   "dependencyDashboard": false,
-  "dependencyDashboardTitle": "🛠 Dependency Dashboard",
-  "semanticCommits": true,
+  "semanticCommits": "enabled",
   "packageRules": [
     {
-      "matchPackagePatterns": ["^@?aws-sdk"],
+      "matchPackagePatterns": ["^@?aws-sdk", "^github\\.com/aws/aws-sdk-go-v2"],
       "groupName": "aws-sdk packages"
-    },
-    {
-      "matchUpdateTypes": ["minor", "patch"],
-      "excludeManagers": ["terraform", "terraform-version", "terragrunt"],
-      "automerge": true
     }
   ]
 }
