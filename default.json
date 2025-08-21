@@ -4,7 +4,7 @@
   "timezone": "Asia/Tokyo",
   "schedule": ["before 8am every weekday"],
   "labels": ["dependencies"],
-  "dependencyDashboard": true,
+  "dependencyDashboard": false,
   "dependencyDashboardTitle": "🛠 Dependency Dashboard",
   "semanticCommits": true,
   "packageRules": [
