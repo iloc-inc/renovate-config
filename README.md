@@ -6,8 +6,6 @@
 
 iloc全体での統一された依存関係更新管理を提供する共有Renovate設定システムです。
 
-**📋 戦略・運用ガイド**: [`../company-ai-strategy/renovate.md`](../company-ai-strategy/renovate.md) で詳細な運用情報を確認
-
 ## 🚀 開発コマンド
 
 設定ファイル専用リポジトリのため、特別な開発コマンドはありません。
