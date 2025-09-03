@@ -1,6 +1,12 @@
-# Renovate Config for iloc-inc
+# renovate-config
 
-This repository contains the shared Renovate configuration used across iloc-inc projects.
+共有 Renovate 設定 - 依存関係自動更新 (Go/Terraform/Hugo)
+
+## 🚀 開発コマンド
+
+このリポジトリは設定ファイルのみのため、特別な開発コマンドはありません。
+
+設定変更後は他リポジトリでの動作確認を行います。
 
 ## Available Configurations
 
