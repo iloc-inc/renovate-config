@@ -53,6 +53,12 @@
       "matchManagers": ["regex"],
       "matchPackageNames": ["golangci/golangci-lint"],
       "groupName": "golangci-lint dependencies"
+    },
+    {
+      "matchManagers": ["regex", "dockerfile"],
+      "matchPackageNames": ["go", "golang"],
+      "groupName": "Go runtime versions",
+      "groupSlug": "go-runtime"
     }
   ]
 }
