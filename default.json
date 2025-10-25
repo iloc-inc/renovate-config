@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base"],
   "timezone": "Asia/Tokyo",
-  "schedule": ["before 8am every weekday"],
+  "schedule": ["at any time"],
   "labels": ["dependencies"],
   "dependencyDashboard": false,
   "semanticCommits": "enabled",
