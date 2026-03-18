@@ -4,8 +4,7 @@
   "timezone": "Asia/Tokyo",
   "schedule": ["before 8am on weekday"],
   "labels": ["dependencies"],
-  "dependencyDashboard": false,
-  "dependencyDashboardApproval": false,
+  "dependencyDashboard": true,
   "semanticCommits": "enabled",
   "packageRules": [
     {
