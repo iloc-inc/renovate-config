@@ -1,11 +1,16 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
+  "extends": ["config:base", "helpers:pinGitHubActionDigests"],
   "timezone": "Asia/Tokyo",
   "schedule": ["before 8am on weekday"],
   "labels": ["dependencies"],
   "dependencyDashboard": true,
   "semanticCommits": "enabled",
+  "pinDigests": true,
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security"]
+  },
   "packageRules": [
     {
       "matchPackagePatterns": ["^@?aws-sdk", "^github\\.com/aws/aws-sdk-go-v2"],
