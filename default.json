@@ -5,6 +5,7 @@
   "schedule": ["before 8am on weekday"],
   "labels": ["dependencies"],
   "dependencyDashboard": true,
+  "dependencyDashboardApproval": false,
   "semanticCommits": "enabled",
   "pinDigests": true,
   "vulnerabilityAlerts": {
