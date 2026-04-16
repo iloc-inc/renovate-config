@@ -6,6 +6,7 @@
   "labels": ["dependencies"],
   "dependencyDashboard": true,
   "dependencyDashboardApproval": false,
+  "automerge": false,
   "semanticCommits": "enabled",
   "pinDigests": true,
   "vulnerabilityAlerts": {
