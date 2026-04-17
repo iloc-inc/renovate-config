@@ -31,9 +31,7 @@
       "groupName": "aws provider (patch)",
       "labels": ["terraform", "provider", "aws"],
       "postUpdateOptions": ["terraformLockFile"],
-      "rangeStrategy": "bump",
-      "automerge": true,
-      "automergeType": "pr"
+      "rangeStrategy": "bump"
     },
     {
       "description": "Terraform modules は手動（挙動差リスク大）",
@@ -58,9 +56,7 @@
       "matchManagers": ["terraform-version"],
       "groupName": "terraform toolchain",
       "labels": ["terraform", "toolchain"],
-      "matchUpdateTypes": ["patch"],
-      "automerge": true,
-      "automergeType": "pr"
+      "matchUpdateTypes": ["patch"]
     }
   ]
 }
