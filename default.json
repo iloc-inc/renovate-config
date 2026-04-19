@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base", "helpers:pinGitHubActionDigests"],
   "timezone": "Asia/Tokyo",
-  "schedule": ["after 8am and before 10am on weekday"],
+  "schedule": ["after 8am and before 10am every weekend"],
   "labels": ["dependencies"],
   "dependencyDashboard": true,
   "dependencyDashboardApproval": false,
@@ -15,7 +15,7 @@
   },
   "packageRules": [
     {
-      "matchPackagePatterns": ["^@?aws-sdk", "^github\\.com/aws/aws-sdk-go-v2"],
+      "matchPackagePatterns": ["^@?aws-sdk", "^github\.com/aws/aws-sdk-go-v2"],
       "groupName": "aws-sdk packages"
     }
   ]
