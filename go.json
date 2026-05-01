@@ -38,9 +38,19 @@
     }
   ],
 
+  "postUpdateOptions": ["gomodTidy"],
+
   "packageRules": [
     {
       "matchManagers": ["gomod"],
+      "matchPackagePatterns": ["^github\\.com/iloc-inc/go-common"],
+      "groupName": "go-common",
+      "semanticCommitType": "fix",
+      "semanticCommitScope": "deps"
+    },
+    {
+      "matchManagers": ["gomod"],
+      "excludePackagePatterns": ["^github\\.com/iloc-inc/go-common"],
       "groupName": "Go dependencies"
     },
     {
