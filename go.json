@@ -3,24 +3,27 @@
 
   "regexManagers": [
     {
-      "fileMatch": ["^\\.go-version$"],
+      "fileMatch": ["(^|/)\\.go-version$"],
       "matchStrings": ["^(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)$"],
       "depNameTemplate": "go",
+      "datasourceTemplate": "golang-version",
       "versioningTemplate": "semver"
     },
     {
-      "fileMatch": ["^go\\.mod$"],
+      "fileMatch": ["(^|/)go\\.mod$"],
       "matchStrings": [
         "(?m)^go (?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)$",
         "(?m)^toolchain go(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)$"
       ],
       "depNameTemplate": "go",
-      "versioningTemplate": "golang"
+      "datasourceTemplate": "golang-version",
+      "versioningTemplate": "semver"
     },
     {
-      "fileMatch": ["^go\\.work$"],
+      "fileMatch": ["(^|/)go\\.work$"],
       "matchStrings": ["(?m)^toolchain go(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)$"],
       "depNameTemplate": "go",
+      "datasourceTemplate": "golang-version",
       "versioningTemplate": "semver"
     },
     {
