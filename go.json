@@ -45,6 +45,11 @@
 
   "packageRules": [
     {
+      "matchDepNames": ["go"],
+      "matchDatasources": ["golang-version"],
+      "groupName": "go version"
+    },
+    {
       "matchManagers": ["gomod"],
       "matchPackagePatterns": ["^github\\.com/iloc-inc/go-common"],
       "groupName": "go-common",
