@@ -13,6 +13,12 @@
     "enabled": true,
     "labels": ["security"]
   },
+  "hostRules": [
+    {
+      "matchHost": "github.com",
+      "hostType": "go"
+    }
+  ],
   "packageRules": [
     {
       "matchPackagePatterns": ["^@?aws-sdk", "^github\.com/aws/aws-sdk-go-v2"],
