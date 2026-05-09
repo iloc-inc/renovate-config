@@ -21,7 +21,7 @@
   ],
   "packageRules": [
     {
-      "matchPackagePatterns": ["^@?aws-sdk", "^github\.com/aws/aws-sdk-go-v2"],
+      "matchPackagePatterns": ["^@?aws-sdk", "^github\\.com/aws/aws-sdk-go-v2"],
       "groupName": "aws-sdk packages"
     }
   ]
