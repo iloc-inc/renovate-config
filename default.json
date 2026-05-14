@@ -23,6 +23,12 @@
     {
       "matchPackagePatterns": ["^@?aws-sdk", "^github\\.com/aws/aws-sdk-go-v2"],
       "groupName": "aws-sdk packages"
+    },
+    {
+      "description": "iloc-inc内のreusable workflow参照はSHA pinしない（private repo間のSHA pinはstartup_failureを引き起こすため）",
+      "matchManagers": ["github-actions"],
+      "matchPackagePatterns": ["^iloc-inc/"],
+      "pinDigests": false
     }
   ]
 }
