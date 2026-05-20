@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base", "helpers:pinGitHubActionDigests"],
   "timezone": "Asia/Tokyo",
-  "schedule": ["after 7pm every day"],
+  "schedule": ["before 3am on the first day of the month"],
   "labels": ["dependencies"],
   "dependencyDashboard": true,
   "dependencyDashboardApproval": false,
@@ -11,7 +11,8 @@
   "pinDigests": true,
   "vulnerabilityAlerts": {
     "enabled": true,
-    "labels": ["security"]
+    "labels": ["security"],
+    "schedule": ["at any time"]
   },
   "hostRules": [
     {
