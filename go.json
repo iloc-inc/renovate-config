@@ -62,10 +62,6 @@
       "groupName": "Go dependencies"
     },
     {
-      "matchManagers": ["gomod"],
-      "matchUpdateTypes": ["patch"]
-    },
-    {
       "matchManagers": ["regex"],
       "matchPackageNames": ["golangci/golangci-lint"],
       "groupName": "golangci-lint dependencies"
