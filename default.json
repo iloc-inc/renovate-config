@@ -18,7 +18,7 @@
     {
       "matchHost": "github.com",
       "hostType": "go",
-      "token": "{{ secrets.PAT_TOKEN }}"
+      "token": "{{ secrets.GO_COMMON_TOKEN }}"
     }
   ]
 }
