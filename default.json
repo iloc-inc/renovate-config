@@ -17,7 +17,8 @@
   "hostRules": [
     {
       "matchHost": "github.com",
-      "hostType": "go"
+      "hostType": "go",
+      "token": "{{ secrets.PAT_TOKEN }}"
     }
   ]
 }
