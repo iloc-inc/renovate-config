@@ -50,23 +50,25 @@ GitHubのセキュリティアドバイザリと連携し、脆弱性が検出�
 - **`default.json`**: 全プロジェクト共通（Asia/Tokyoタイムゾーン、平日朝8時前スケジュール、サプライチェーン攻撃対策）
 - **`go.json`**: Go専用（.go-version、go.mod、golangci-lint管理）
 - **`hugo.json`**: Hugo専用（Netlify/GitHub Actions版本管理）
-- **`terraform.json`**: Terraform専用（AWS provider、バージョン制約管理）
+- **`terraform.json`**: Terraform専用（provider、core/toolchainバージョン、tflint、tflintプラグイン）
 
 ## ⚡ 自動化戦略
 
 ### 自動マージ
-- パッチ更新（セキュリティ・バグ修正）
-- Go依存関係（テスト通過後）
-- AWS SDKパッチ更新
 
-### 手動レビュー
-- メジャーバージョン（破壊的変更）
-- Terraform メジャー（インフラ影響）
-- Hugo更新（サイト生成影響）
+**現状、全プリセットで無効**（`default.json` の `"automerge": false`）。上書きしているプリセットはありません。
+
+特に `infra` / `security-infra` は **mainへのマージで `terraform apply -auto-approve` が走る**ため、依存更新を自動マージするとレビュー無しでAWSに適用されます。Terraform関連は今後も自動マージしない方針です。
+
+### 手動レビュー（＝すべての更新）
+- Terraform provider / modules / core / toolchain（`.terraform-version`）
+- tflint 本体・rulesetプラグイン
+- GitHub Actions digest
+- Go / Hugo の各依存
 
 ### スケジューリング
-- **実行タイミング**: 平日朝8時前（Asia/Tokyo）
-- **レビューフロー**: 朝にPR作成 → 営業時間中レビュー → 条件満たすもの自動マージ
+- **実行タイミング**: 毎月1日 3時前（Asia/Tokyo）
+- **例外**: 脆弱性アラート（`vulnerabilityAlerts`）はスケジュール無視で即時PR作成
 
 ## 使用方法
 
