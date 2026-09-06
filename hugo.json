@@ -1,10 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
 
-  "regexManagers": [
+  "customManagers": [
     {
       "description": "GitHub Actions: actions-hugo の hugo-version 入力",
-      "fileMatch": ["^\\.github/workflows/.*\\.ya?ml$"],
+      "customType": "regex",
+      "managerFilePatterns": ["/^\\.github/workflows/.*\\.ya?ml$/"],
       "matchStrings": [
         "hugo-version:\\s*\"?v?(?<currentValue>\\d+\\.\\d+\\.\\d+)\"?"
       ],
@@ -26,7 +27,7 @@
     {
       "description": "Hugo themes（git submodules）はまとめてPR。手動レビュー、少し寝かす",
       "matchManagers": ["git-submodules"],
-      "matchPaths": ["themes/**"],
+      "matchFileNames": ["themes/**"],
       "groupName": "Hugo themes",
       "labels": ["hugo", "theme"],
       "minimumReleaseAge": "3 days",

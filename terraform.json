@@ -4,7 +4,7 @@
     {
       "description": "GitHub Actionsワークフロー内のtflint_versionを検出",
       "customType": "regex",
-      "fileMatch": ["\\.github/workflows/.*\\.ya?ml$"],
+      "managerFilePatterns": ["\\.github/workflows/.*\\.ya?ml$"],
       "matchStrings": ["tflint_version:\\s*(?<currentValue>v\\S+)"],
       "depNameTemplate": "terraform-linters/tflint",
       "datasourceTemplate": "github-releases"
