@@ -23,7 +23,7 @@
       "automerge": false
     },
     {
-      "description": "hashicorp/aws の patch は自動マージ（PR経由）＋lockfile更新",
+      "description": "hashicorp/aws の patch は独立PRにして差分を追いやすくする＋lockfile更新。rangeStrategy は上の providers ルールから継承する（matchUpdateTypes と併用できないため、ここでは指定しない）。mainへのマージでterraform applyが走るため自動マージはしない",
       "matchManagers": ["terraform"],
       "matchDatasources": ["terraform-provider"],
       "matchPackageNames": ["hashicorp/aws"],
@@ -31,7 +31,7 @@
       "groupName": "aws provider (patch)",
       "labels": ["terraform", "provider", "aws"],
       "postUpdateOptions": ["terraformLockFile"],
-      "rangeStrategy": "bump"
+      "automerge": false
     },
     {
       "description": "Terraform modules は手動（挙動差リスク大）",
@@ -52,11 +52,20 @@
       "automerge": false
     },
     {
-      "description": ".terraform-version（tfenv）: patchは自動（PR経由）",
+      "description": ".terraform-version（tfenv）: patch/minor/major すべてPRを出す。CIのsetup-terraformもこのファイルを読むため影響範囲が広く、マージは手動",
       "matchManagers": ["terraform-version"],
       "groupName": "terraform toolchain",
       "labels": ["terraform", "toolchain"],
-      "matchUpdateTypes": ["patch"]
+      "separateMinorPatch": true,
+      "automerge": false
+    },
+    {
+      "description": ".tflint.hcl のrulesetプラグイン: lintルールが増減して既存コードが落ちうるため手動",
+      "matchManagers": ["tflint-plugin"],
+      "groupName": "tflint plugins",
+      "labels": ["terraform", "tflint"],
+      "minimumReleaseAge": "3 days",
+      "automerge": false
     }
   ]
 }
