@@ -14,6 +14,13 @@
     "labels": ["security"],
     "schedule": ["at any time"]
   },
+  "packageRules": [
+    {
+      "description": "github-releases 由来のツールバージョン（.terraform-version、tflintのruleset、setup-python の python-version 等）はタグが v プレフィックス付きのため digest 解決に必ず失敗し、pinDigests を効かせると更新そのものが捨てられる。GitHub Actions は datasource が github-tags で helpers:pinGitHubActionDigests が担当しているため影響しない",
+      "matchDatasources": ["github-releases"],
+      "pinDigests": false
+    }
+  ],
   "hostRules": [
     {
       "matchHost": "github.com",
