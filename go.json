@@ -6,7 +6,7 @@
       "description": ".go-version の Go 本体バージョン",
       "customType": "regex",
       "managerFilePatterns": ["/(^|/)\\.go-version$/"],
-      "matchStrings": ["^(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)$"],
+      "matchStrings": ["(?m)^(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)\\s*$"],
       "depNameTemplate": "go",
       "datasourceTemplate": "golang-version",
       "versioningTemplate": "semver"
