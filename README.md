@@ -173,20 +173,25 @@ GitHubのセキュリティアドバイザリと連携し、脆弱性が検出�
 | Bot無効化 | `.renovaterc.json`の`enabled`確認 | `enabled: true`に設定 |
 | 依存関係ファイル未検出 | `go.mod`、`*.tf`等の存在確認 | ファイルが無いとRenovateは動作しない |
 | digest解決の失敗 | dry-runログに `Could not determine new digest for update.` が出ていないか | 該当 datasource を `pinDigests: false` の対象に加える（[実例](#-サプライチェーン攻撃対策)） |
-| hostRulesのシークレット未設定 | dry-runが `init` フェーズで `Unknown secrets name` により中断していないか | Mend側でシークレットを再設定。未設定だと extract も lookup も一切走らず、**PRが出ないだけの静かな停止**になる |
+| configが参照するシークレットがMend側に無い | dry-runが `init` フェーズで `Unknown secrets name` により中断していないか | Mend側でシークレットを再設定。未設定だと extract も lookup も一切走らず、**PRが出ないだけの静かな停止**になる。config で `{{ secrets.* }}` を外すときは **config を先に、Mend のシークレットを後に**消す |
 
 いずれも Dependency Dashboard には何も表示されず、CIも緑のままです。**「更新が来ないだけ」の障害は気づけない**ので、疑ったら必ず dry-run でログを見てください。
 
 ```bash
 LOG_LEVEL=debug \
   RENOVATE_TOKEN="$(gh auth token)" \
-  RENOVATE_SECRETS='{"GO_COMMON_TOKEN":"dummy"}' \
   npx --yes --package renovate renovate --dry-run=full --platform=github iloc-inc/infra
 ```
 
 - リポジトリ名は**位置引数**（`--repositories=` は不正オプションで起動に失敗します）
-- `RENOVATE_SECRETS` を渡さないと `hostRules` の `{{ secrets.* }}` を解決できず init で止まります
+- config に `{{ secrets.* }}` を書いた場合は、`RENOVATE_SECRETS='{"NAME":"dummy"}'` を渡さないと init で止まります
 - 生成されるはずのブランチは `"branchName": "renovate/..."` を grep すると一覧できます
+
+### private Go モジュール（go-common）の go.sum が更新されない
+
+go-common は private なので、公開の checksum DB（sum.golang.org）では検証できない。Mend の org 設定の Variables に **`GOPRIVATE=github.com/iloc-inc/*`** を入れ、公開 DB と proxy を通さず git で直接取らせている。これが無いと `sum.golang.org/lookup/... 404` で go.sum だけ更新されない PR になる（#37）。
+
+取得の認証には PAT を使わず、全リポジトリにインストールされている Renovate App のトークンに任せている（iloc-inc/company-ai-strategy#391）。以前は hostRules と Mend の Host Rule で go-common 用 PAT（`GO_COMMON_TOKEN`）を渡していたが、#37 の本当の原因は `GOPRIVATE` の欠落だった。
 
 ### マージ失敗
 
